@@ -23,7 +23,8 @@ const select = document.querySelector('.breed-select');
 //     })
 //     .catch(error => { console.log(error) })
 // ;
-function getEvents() {
+
+function getBreeds() {
   fetchBreeds()
   .then(data => {
   console.log(data)
