@@ -1,4 +1,4 @@
-import { fetchBreeds } from "./cat-api";
+import { fetchBreeds, fetchCatByBreed } from "./cat-api";
 
 const select = document.querySelector('.breed-select');
 
@@ -6,25 +6,6 @@ const select = document.querySelector('.breed-select');
 // const BASE_URL = 'https://api.thecatapi.com/v1';
 // const API_KEY = 'live_nRyBlc19ILgE4nLWfQo9Nn1yYwfBI4JaTQSD12pVrfB9zC5p2razV1tS3IpPtcIw';
 
-
-// fetch(`${BASE_URL}/breeds?api_key=${API_KEY}`)
-// .then(response => {
-//   if (!response.ok) {
-//     throw new Error(response.status);
-//   }
-//   return response.json();
-// })
-// .then(data => {
-//   console.log(data)
-//   const markup = data.map(({ id, name }) => {
-//     return `<option value=${id}>${name}</option>`
-//   })
-//       select.innerHTML = markup
-//     })
-//     .catch(error => { console.log(error) })
-// ;
-
-function getBreeds() {
   fetchBreeds()
   .then(data => {
   console.log(data)
@@ -33,4 +14,29 @@ function getBreeds() {
   })
       select.innerHTML = markup
     })
+
+
+    select.addEventListener("submit", (e) => {
+    e.preventDefault();
+    fetchCatByBreed(breedId)
+    .then((users) => renderUserList(users))
+    .catch((error) => console.log(error));
+    });
+function renderUserList(users) {
+  const markup = users.map(({ id, url, name }) => {
+    return ``
+  })
 }
+  // const form = e.currentTarget;
+  // console.log(form); 
+//   const searchID = form.elements.value;
+  
+//   fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=${searchID}&api_key=${API_KEY}`)
+//     .then(response => {
+//       return response.json()
+//     })
+//     .catch(error => {
+//       console.log(error)
+//     })
+  
+
