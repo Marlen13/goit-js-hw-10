@@ -1,0 +1,2 @@
+fetch("".concat("https://api.thecatapi.com/v1","/breeds?api_key=").concat("live_nRyBlc19ILgE4nLWfQo9Nn1yYwfBI4JaTQSD12pVrfB9zC5p2razV1tS3IpPtcIw")).then((function(e){if(!e.ok)throw new Error(e.status);return e.json()})).then((function(e){console.log(e);var n=document.querySelector(".breed-select"),t=e.map({id:id,name:name});n.innerHTML=t})).catch((function(e){console.log(e)}));
+//# sourceMappingURL=index.f6aa1387.js.map
