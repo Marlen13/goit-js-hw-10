@@ -15,19 +15,20 @@ fetchBreeds()
   // console.log(markup)
   select.innerHTML = markup
 })
-
 //choose breed 
 select.addEventListener('submit', onSearch);
 function onSearch(e) {
+  
   e.preventDefault();
-  const breedId = this.value;
-  // const breedId = e.currentTarget.elements.value;
+  // const breedId = this.value;
+  const breedId = e.target.value;
+ 
+  console.log(breedId);
   fetchCatByBreed(breedId)
-    .then((cats) => { console.log(cats); renderCatsList(cats) })
-    .catch((error) => console.log(error));
-      };
-function renderCatsList() {
-  const markup = users.map(({ url, cfa_url, name, }) => {
-    return `<img src="" alt="">`
-  }).join()
-}
+    .then(cats => console.log(cats))
+    .catch(error => console.log(error));
+      }
+// function renderCatsList() {
+//   const markup = users.map(({ url, cfa_url, name, }) => {
+//     return `<img src="" alt="">`
+//   }).join()
