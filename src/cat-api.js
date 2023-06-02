@@ -9,25 +9,18 @@ export function fetchBreeds() {
             throw new Error(response.status);
         }
         return response.json();
-    })
-     .catch(error => {
-         console.log(error)
-     })
-    
+    })   
 }
 export function fetchCatByBreed(breedID) {
-    const param = new URLSearchParams({
-        api_key: API_KEY,
-        breed_ids: breedID,
-     })
-    return fetch(`${BASE_URL}/images/search?${param}`)
+    // const param = new URLSearchParams({
+    //     api_key: API_KEY,
+    //     breed_ids: breedID,
+    //  })
+    return fetch(`${BASE_URL}/images/search?api_key=${API_KEY}&breed_ids=${breedID}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(response.status);
             }
             return response.json()
         })
-    .catch(error => {
-         console.log(error)
-     })
  }

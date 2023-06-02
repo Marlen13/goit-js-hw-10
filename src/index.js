@@ -1,56 +1,61 @@
 
-// import SlimSelect from 'slim-select';
-
+import SlimSelect from 'slim-select';
 import { fetchBreeds, fetchCatByBreed } from "./cat-api";
+import 'slim-select/dist/slimselect.css';
+function create() {
+  new SlimSelect({
+    select: '#selectElement',
+    events: { afterChange: (newVal) => onSearch(newVal)}
+  })
+}
+
 
 const select = document.querySelector('.breed-select');
-// console.log(select)
-// const BASE_URL = 'https://api.thecatapi.com/v1';
-// const API_KEY = 'live_nRyBlc19ILgE4nLWfQo9Nn1yYwfBI4JaTQSD12pVrfB9zC5p2razV1tS3IpPtcIw';
-// const catInfo = document.querySelector('.cat-info')
+const catInfo = document.querySelector('.cat-info')
 const loader = document.querySelector('.loader');
-const error = document.querySelector('.error');
-loader.classList.add('unvisible');
-error.classList.add('unvisible');
+const errorMessage = document.querySelector('.error');
+
 
 // fill field select from backend
 fetchBreeds()
 .then(data => {
-  console.log(data)
   const markup = data.map(({ id, name }) => {
     return `<option value=${id}>${name}</option>`
-  })
-  // console.log(markup)
-  
-  select.innerHTML = markup
-  
+  }).join('');
+  select.innerHTML = markup;
+  select.classList.remove('unvisible');
+  create();
+}).catch(error => {
+  errorMessage.classList.remove('unvisible')
+}).finally(() => {
+  loader.classList.add('unvisible');
 })
 //choose breed 
-select.addEventListener("submit", onSearch);
-function onSearch(e) {
-  
-  e.preventDefault()
-  select.classList.add('unvisible')
-  loader.classList.remove('unvisible')
-  // const breedId = this.value;
-  const breedId = e.target.elements.value;
-  
-  console.log(breedId);
-  // fetchCatByBreed(breedId)
-  //   .then((data) => {
-  //     console.log(data)
-  //      function renderCatsList(breedId)
-  //   }).finally(() => {
-  //     loader.classList.add('unvisible')
-  //   })
-}
-function renderCatsList() {
-  const markup = users.map(({ url, cfa_url, name, }) => {
-    return `<img src="${cfa_url}" alt="${name}">`
-  }).join()
 
-  
-  catInfo.insertAdjacentHTML("beforeend", markup)
+function onSearch(data) {
+
+  catInfo.innerHTML = '';
+  loader.classList.remove('unvisible')
+  const breedId = data[0].value;
+
+  fetchCatByBreed(breedId)
+    .then((data) => {
+      console.log(data)
+     renderCatsList(data)
+    }).catch(error => {
+      errorMessage.classList.remove('unvisible')
+    }).finally(() => {
+      loader.classList.add('unvisible')
+    })
 }
-// select.classList.add('unvisible')
-  // loader.classList.remove('unvisible')
+function renderCatsList(cats) {
+  const url = cats[0].url;
+  const { name, temperament, description } = cats[0].breeds[0];
+  const markup = `<img src="${url}" alt="${name}" width="400"><div>
+        <h1>${name}</h1>
+        <p>${description}</p>
+          <p><b> Temperament: </b>${temperament}</p>
+         </div>`
+
+  catInfo.innerHTML = markup;
+}
