@@ -15,8 +15,12 @@ export function fetchBreeds() {
      })
     
 }
- export function fetchCatByBreed(breedID) {
-    return fetch(`${BASE_URL}/images/search?breed_ids=${breedID}&api_key=${API_KEY}`)
+export function fetchCatByBreed(breedID) {
+    const param = new URLSearchParams({
+        api_key: API_KEY,
+        breed_ids: breedID,
+     })
+    return fetch(`${BASE_URL}/images/search?${param}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(response.status);
