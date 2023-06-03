@@ -40,7 +40,7 @@ function onSearch(data) {
 
   fetchCatByBreed(breedId)
     .then((data) => {
-      console.log(data)
+      // console.log(data)
      renderCatsList(data)
     }).catch(error => {
       errorMessage.classList.remove('unvisible')
@@ -56,6 +56,7 @@ function renderCatsList(cats) {
         <p>${description}</p>
           <p><b> Temperament: </b>${temperament}</p>
          </div>`
-
+  
+  // console.log(url);
   catInfo.innerHTML = markup;
 }
