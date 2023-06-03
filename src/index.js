@@ -51,10 +51,10 @@ function onSearch(data) {
 function renderCatsList(cats) {
   const url = cats[0].url;
   const { name, temperament, description } = cats[0].breeds[0];
-  const markup = `<img src="${url}" alt="${name}" width="400"><div>
+  const markup = `<img src="${url}" alt="${name}" width="400"><div class="description">
         <h1>${name}</h1>
         <p>${description}</p>
-          <p><b> Temperament: </b>${temperament}</p>
+          <p class="cat-character"><b> Temperament: </b>${temperament}</p>
          </div>`
   
   // console.log(url);
