@@ -26,10 +26,14 @@
   background-size: cover;
   background-position: center;
 }
-
+// add styles for search
+.breed-select {
+  margin-bottom: 10px;
+}
 .unvisible {
   display: none;
 }
+// block info about find cat
 .cat-info {
   display: flex;
 }
@@ -40,7 +44,7 @@
 .cat-character{
   font-size: 14px;
 }
-// add styles library for loader, change size fron 48px to 150px
+// add styles library for loader, change size w/h from 48px to 150px
 .loader {
   transform: rotateZ(45deg);
   perspective: 1000px;
@@ -50,14 +54,14 @@
   color: #fff;
   
 }
-
+// change t/l 0->40
 .loader:before,
 .loader:after {
   content: '';
   display: block;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 40;
+  left: 40;
   width: inherit;
   height: inherit;
   border-radius: 50%;
