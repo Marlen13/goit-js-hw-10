@@ -1,4 +1,4 @@
-
+import Notiflix from 'notiflix';
 import SlimSelect from 'slim-select';
 import { fetchBreeds, fetchCatByBreed } from "./cat-api";
 import 'slim-select/dist/slimselect.css';
@@ -26,7 +26,8 @@ fetchBreeds()
   select.classList.remove('unvisible');
   create();
 }).catch(error => {
-  errorMessage.classList.remove('unvisible')
+  errorMessage.classList.remove('unvisible');
+  Notiflix.Notify.failure(error.message)
 }).finally(() => {
   loader.classList.add('unvisible');
 })
@@ -37,13 +38,15 @@ function onSearch(data) {
   catInfo.innerHTML = '';
   loader.classList.remove('unvisible')
   const breedId = data[0].value;
+  errorMessage.classList.add('unvisible')
 
   fetchCatByBreed(breedId)
     .then((data) => {
       // console.log(data)
      renderCatsList(data)
     }).catch(error => {
-      errorMessage.classList.remove('unvisible')
+      errorMessage.classList.remove('unvisible');
+     Notiflix.Notify.failure(error.message)
     }).finally(() => {
       loader.classList.add('unvisible')
     })
